@@ -17,6 +17,16 @@ import math
 # # Define colors
 # WHITE = (255, 255, 255)
 
+def interpolate_color(color1, color2, t):
+    """
+    Interpolates between two colors color1 and color2.
+    t should be a value between 0 and 1 indicating the interpolation factor.
+    """
+    r = int(color1[0] * (1 - t) + color2[0] * t)
+    g = int(color1[1] * (1 - t) + color2[1] * t)
+    b = int(color1[2] * (1 - t) + color2[2] * t)
+    return (r, g, b)
+
 
 height=10
 width=10
@@ -44,6 +54,8 @@ def display_array(array):
     
     num_particles=5
     
+    cnt=204
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -65,18 +77,29 @@ def display_array(array):
                 
                 
 
-        screen.fill((255, 255, 255))
+        screen.fill((169, 169, 169))
+        
+        
 
         for row in range(len(array)):
             for col in range(len(array[0])):
-                color = (0, 0, 0) if array[row][col] == 0 else (255, 0, 0)
+                color = (0, 0, 0) if array[row][col] == 0 else (236, 204, 162)
+                
                 pygame.draw.rect(screen, color, (col * (cell_size + margin), row * (cell_size + margin), cell_size, cell_size))
                 
                 
         #xyz
+        cnt=cnt+1
+        
+        if(cnt>=255):
+            cnt=204
                 
         for row in range(len(array) - 1, -1, -1):  # iterate from bottom to top
             for col in range(len(array[row])):
+                
+                if array[row][col] == 1:
+                    color = (0, 0, 0) if array[row][col] == 0 else (236, cnt, 162)
+                
                 if array[row][col] == 1 and row < len(array) - 1 and array[row + 1][col] == 0:
                     array[row + 1][col] = 1
                     array[row][col] = 0
