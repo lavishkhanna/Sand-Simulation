@@ -58,6 +58,9 @@ def display_array(array):
                 color = (0, 0, 0) if array[row][col] == 0 else (255, 0, 0)
                 pygame.draw.rect(screen, color, (col * (cell_size + margin), row * (cell_size + margin), cell_size, cell_size))
                 
+                
+        #xyz
+                
         for row in range(len(array) - 1, -1, -1):  # iterate from bottom to top
             for col in range(len(array[row])):
                 if array[row][col] == 1 and row < len(array) - 1 and array[row + 1][col] == 0:
