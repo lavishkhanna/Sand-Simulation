@@ -1,6 +1,7 @@
 import pygame
 import numpy as np
 import sys
+import random
 
 # # Initialize Pygame
 # pygame.init()
@@ -66,6 +67,16 @@ def display_array(array):
                 if array[row][col] == 1 and row < len(array) - 1 and array[row + 1][col] == 0:
                     array[row + 1][col] = 1
                     array[row][col] = 0
+                    
+                random_number = random.choice([0, 1])
+                    
+                if random_number==0 and array[row][col]==1 and row < len(array) - 1 and col>=1 and array[row + 1][col-1]==0:
+                    array[row+1][col-1]=1
+                    array[row][col]=0
+                elif random_number==1 and array[row][col]==1 and row < len(array)-1 and col<len(array[0])-1 and array[row+1][col+1]==0:
+                    array[row+1][col+1]=1
+                    array[row][col]=0      
+                    
 
 
         pygame.display.flip()
